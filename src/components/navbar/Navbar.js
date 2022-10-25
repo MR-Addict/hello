@@ -1,32 +1,14 @@
-import React, { useState } from "react";
-import { AiFillCaretDown } from "react-icons/ai";
+import React from "react";
 
 import config from "./config";
 import logo from "./logo.jpg";
 
-const Submenu = ({ item }) => {
-  return (
-    <div className='flex flex-col items-start absolute top-10 left-0 bg-main-dark-bg shadow-xl'>
-      {item.map((prop) => {
-        return <Menu key={Math.random()} item={prop} />;
-      })}
-    </div>
-  );
-};
-
 const Menu = ({ item }) => {
-  const [dropDrow, setDropdown] = useState(false);
   return (
-    <div
-      onMouseOver={() => setDropdown(true)}
-      onMouseOut={() => setDropdown(false)}
-      className='flex flex-row items-center relative'
-    >
+    <div className='flex flex-row items-center relative'>
       <div className='hover:text-main-theme p-1 rounded-md m-1 flex flex-row items-center gap-1 cursor-pointer'>
         {item.title}
-        {item.submenu && <AiFillCaretDown />}
       </div>
-      {item.submenu && dropDrow && <Submenu item={item.submenu} />}
     </div>
   );
 };

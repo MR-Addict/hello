@@ -1,7 +1,7 @@
 import React from "react";
 
 const Footer = () => {
-  return <div className='w-full text-center my-3'>Copyright &copy; 南京工业大学Vista机器人实验室</div>;
+  return <div className='w-full text-center my-3'>&copy; Copyright 校大学生科协</div>;
 };
 
 export default Footer;
