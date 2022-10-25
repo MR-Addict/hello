@@ -6,10 +6,37 @@ import { useStateContext } from "../../context/ContextProvider";
 const Upload = () => {
   const { setIsClickUpload } = useStateContext();
 
-  const [uploadFiles, setUploadFiles] = useState([]);
+  const [userID, setUseID] = useState("");
+  const [sourceFiles, setSourceFiles] = useState([]);
   const [previewImage, setPreviewImage] = useState([]);
+  const [isUploaded, setIsUploaded] = useState(false);
+  const [isUploadFailed, setIsUploadFailed] = useState(false);
+
   const hiddenFileInput = useRef();
   const hiddenImageInput = useRef();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!(userID.length && sourceFiles.length && previewImage.length)) return;
+    const formData = new FormData();
+    formData.append("id", userID);
+    previewImage.forEach((item) => formData.append("preview", item));
+    sourceFiles.forEach((item) => formData.append("sources", item));
+    fetch("http://127.0.0.1:8090/api/v1/submit", {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => {
+        if (res.json().status) setIsUploadFailed(false);
+        else setIsUploadFailed(true);
+        setIsUploaded(true);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsUploadFailed(true);
+        setIsUploaded(true);
+      });
+  };
 
   const File = ({ file, isImage }) => {
     return (
@@ -20,9 +47,9 @@ const Upload = () => {
           onClick={() => {
             if (isImage) setPreviewImage([]);
             else {
-              let uploaded = [...uploadFiles];
+              let uploaded = [...sourceFiles];
               uploaded = uploaded.filter((item) => item !== file);
-              setUploadFiles(uploaded);
+              setSourceFiles(uploaded);
             }
           }}
         />
@@ -31,17 +58,40 @@ const Upload = () => {
   };
 
   return (
-    <form className='absolute top-0 left-0 md:w-[380px] w-[300px] h-[430px] bg-slate-700 rounded-xl p-5 flex flex-col items-center justify-between'>
+    <form
+      onSubmit={handleSubmit}
+      className='absolute top-0 left-0 md:w-[380px] w-[300px] h-[430px] bg-slate-700 rounded-xl p-5 flex flex-col items-center justify-between'
+    >
+      {isUploaded && (
+        <div className='absolute top-0 left-0 md:w-[380px] w-[300px] h-[430px] bg-white bg-opacity-60 rounded-xl flex items-center justify-center duration-300'>
+          <div className='flex flex-col items-center justify-center gap-5 w-2/3 h-2/3 bg-slate-700 rounded-xl'>
+            <div className='text-2xl font-semibold'>{isUploadFailed ? "上传成功" : "上传失败"}</div>
+            <button
+              type='button'
+              className='p-2 rounded-md bg-main-theme w-[100px] font-semibold'
+              onClick={() => setIsClickUpload(false)}
+            >
+              确认
+            </button>
+          </div>
+        </div>
+      )}
       <div className='flex flex-col gap-1 w-full'>
         <label htmlFor='id' className='text-white'>
           个人ID
         </label>
-        <input maxLength={20} required type='text' name='id' className='bg-gray-600 rounded-md p-2 outline-none' />
+        <input
+          required
+          type='text'
+          value={userID}
+          maxLength={20}
+          onChange={(e) => setUseID(e.target.value)}
+          className='bg-gray-600 rounded-md p-2 outline-none'
+        />
       </div>
 
       <div className='w-full'>
         <input
-          required
           multiple
           type='file'
           ref={hiddenImageInput}
@@ -64,16 +114,15 @@ const Upload = () => {
 
       <div className='w-full'>
         <input
-          required
           multiple
           type='file'
           ref={hiddenFileInput}
           onChange={() => {
-            const uploaded = [...uploadFiles];
+            const uploaded = [...sourceFiles];
             Array.prototype.slice.call(hiddenFileInput.current.files).forEach((file) => {
               if (uploaded.findIndex((f) => f.name === file.name) === -1) uploaded.push(file);
             });
-            setUploadFiles(uploaded);
+            setSourceFiles(uploaded);
           }}
           style={{ display: "none" }}
         />
@@ -85,7 +134,7 @@ const Upload = () => {
           上传网页文件
         </button>
         <div className='flex bg-gray-600 rounded-md flex-wrap h-[120px] overflow-y-auto'>
-          {uploadFiles.map((file) => (
+          {sourceFiles.map((file) => (
             <File key={file.lastModified} file={file} />
           ))}
         </div>

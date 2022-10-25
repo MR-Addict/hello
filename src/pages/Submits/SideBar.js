@@ -9,7 +9,7 @@ const submits = [
   {
     id: 202021007063,
     image: image1,
-    views: 20,
+    views: 10,
     link: "/",
   },
   {
@@ -58,12 +58,12 @@ const SideBar = () => {
         <div>数据统计</div>
         <div className='flex flex-row justify-between gap-4'>
           {data.map((item) => {
-            return <Card item={item} />;
+            return <Card item={item} key={item.name} />;
           })}
         </div>
       </div>
       <div className='flex flex-col gap-1'>
-        <div>最新提交</div>
+        <div>最受欢迎</div>
         <div className='flex flex-col gap-4'>
           {submits.map((item) => {
             return (
@@ -71,8 +71,11 @@ const SideBar = () => {
                 <img src={item.image} alt={item.id} className='rounded-md' />
                 <div className='flex flex-row items-center justify-between'>
                   <span>{item.id}</span>
-                  <a href={item.link} className='text-main-theme'>
-                    <FaShare />
+                  <a href={item.link} className='flex flex-row gap-1 items-center'>
+                    <span>{item.views}</span>
+                    <div className='text-main-theme'>
+                      <FaShare />
+                    </div>
                   </a>
                 </div>
               </div>
