@@ -1,14 +1,19 @@
 import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Navbar from "./components/navbar/Navbar";
-import Footer from "./components/footer/Footer";
+import { HomeLayout } from "./layout";
+import { Home, Submits } from "./pages";
 
 const App = () => {
   return (
-    <div className='bg-main-bg w-full min-h-screen'>
-      <Navbar />
-      <Footer />
-    </div>
+    <Router>
+      <Routes>
+        <Route element={<HomeLayout />}>
+          <Route path='/' element={<Home />} />
+          <Route path='/submits' element={<Submits />} />
+        </Route>
+      </Routes>
+    </Router>
   );
 };
 

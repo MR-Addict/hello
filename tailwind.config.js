@@ -4,8 +4,15 @@ module.exports = {
     extend: {
       colors: {
         "main-bg": "#FBFBFB",
-        "main-dark-bg": "#EFEFEF",
-        "main-theme": "#1A97F5",
+        "main-dark-bg": "#B2B2B2",
+        "main-theme": "#FFA500",
+        "navbar-theme": "#150050",
+      },
+      backgroundImage: {
+        welcome: "url('./data/images/welcome.png')",
+      },
+      fontFamily: {
+        cursive: ["cursive"],
       },
     },
   },

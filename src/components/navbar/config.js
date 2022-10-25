@@ -4,16 +4,8 @@ const navLinks = [
     link: "/",
   },
   {
-    title: "成员信息",
-    link: "/members",
-  },
-  {
-    title: "培训课程",
-    link: "/courses",
-  },
-  {
-    title: "实验室网盘",
-    link: "/apps",
+    title: "浏览",
+    link: "/submits",
   },
 ];
 
