@@ -67,7 +67,7 @@ const SideBar = () => {
         <div className='flex flex-col gap-4'>
           {submits.map((item) => {
             return (
-              <div className='flex flex-col gap-2 bg-gray-200 p-2 rounded-md'>
+              <div key={item.id} className='flex flex-col gap-2 bg-gray-200 p-2 rounded-md'>
                 <img src={item.image} alt={item.id} className='rounded-md' />
                 <div className='flex flex-row items-center justify-between'>
                   <span>{item.id}</span>

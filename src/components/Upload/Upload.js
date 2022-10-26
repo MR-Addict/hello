@@ -9,6 +9,7 @@ const Upload = () => {
 
   const [userID, setUseID] = useState("");
   const [userInfo, setUserInfo] = useState("");
+  const [redirectURL, setRedirectURL] = useState("#");
   const [sourceFiles, setSourceFiles] = useState([]);
   const [previewImage, setPreviewImage] = useState([]);
   const [isUploaded, setIsUploaded] = useState(false);
@@ -25,13 +26,13 @@ const Upload = () => {
     formData.append("info", userInfo);
     previewImage.forEach((item) => formData.append("preview", item));
     sourceFiles.forEach((item) => formData.append("sources", item));
-    fetch(BACKEND_URL + "/api/v1/submit", {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => {
-        if (res.json().status) setIsUploadFailed(false);
-        else setIsUploadFailed(true);
+    fetch(BACKEND_URL + "api/v1/submit", { method: "POST", body: formData })
+      .then(async (res) => {
+        const resJSON = await res.json();
+        if (resJSON.status) {
+          setIsUploadFailed(false);
+          setRedirectURL(resJSON.msg.link);
+        } else setIsUploadFailed(true);
         setIsUploaded(true);
       })
       .catch((err) => {
@@ -63,7 +64,7 @@ const Upload = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className='absolute md:-top-10 md:-left-10 top-0 left-0 md:w-[460px] w-[300px] md:h-[510px] h-[470px] bg-slate-700 rounded-xl p-5 flex flex-col gap-2 items-center justify-between'
+      className='absolute md:-top-10 md:-left-10 top-0 left-0 md:w-[460px] w-[300px] md:h-[510px] h-[470px] bg-slate-700 rounded-xl py-5 px-7 flex flex-col gap-2 items-center justify-between'
     >
       {isUploaded && (
         <div className='absolute top-0 left-0 md:w-[460px] w-[300px] md:h-[510px] h-[470px] bg-white bg-opacity-60 rounded-xl flex items-center justify-center duration-300'>
@@ -72,12 +73,7 @@ const Upload = () => {
 
             <div className='flex flex-row items-center justify-center gap-3 font-semibold w-[150px] text-center'>
               {!isUploadFailed && (
-                <a
-                  target='_blank'
-                  rel='noreferrer'
-                  href={BACKEND_URL + "/preview/" + userID}
-                  className='p-2 rounded-md bg-main-theme w-full'
-                >
+                <a target='_blank' rel='noreferrer' href={redirectURL} className='p-2 rounded-md bg-main-theme w-full'>
                   跳转
                 </a>
               )}
@@ -114,7 +110,7 @@ const Upload = () => {
           required
           type='text'
           value={userInfo}
-          maxLength={100}
+          maxLength={500}
           onChange={(e) => setUserInfo(e.target.value)}
           className='bg-gray-600 rounded-md p-2 outline-none'
         />
