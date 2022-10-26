@@ -1,22 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { RiNumbersFill } from "react-icons/ri";
 import { MdTouchApp } from "react-icons/md";
 import { FaShare } from "react-icons/fa";
 
 import { useStateContext } from "../../context/ContextProvider";
-
-const data = [
-  {
-    name: "提交量",
-    value: 20,
-    icon: <RiNumbersFill />,
-  },
-  {
-    name: "点击量",
-    value: 100,
-    icon: <MdTouchApp />,
-  },
-];
 
 const Card = ({ item }) => {
   return (
@@ -31,8 +18,11 @@ const Card = ({ item }) => {
 };
 
 const SideBar = () => {
-  const [insight, setInsight] = useState([]);
   const { submits, handleClick } = useStateContext();
+  const data = [
+    { name: "提交量", value: submits.length, icon: <RiNumbersFill /> },
+    { name: "点击量", value: submits.reduce((acc, obj) => acc + obj.views, 0), icon: <MdTouchApp /> },
+  ];
 
   return (
     <div className='md:w-[400px] w-full bg-main-bg shadow-2xl md:h-[100vh] h-fit sticky top-0 rounded-xl p-4 flex flex-col gap-2'>
@@ -48,7 +38,7 @@ const SideBar = () => {
         <div>最受欢迎</div>
         <div className='flex flex-col gap-4'>
           {submits
-            .sort((a, b) => a.views - b.views)
+            .sort((a, b) => b.views - a.views)
             .slice(0, 3)
             .map((item) => {
               return (
