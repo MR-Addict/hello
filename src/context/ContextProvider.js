@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useState } from "react";
 
-const StateContext = createContext();
+import BACKEND_URL from "../data/config";
 
-const BACKEND_URL = "http://127.0.0.1:8090/";
+const StateContext = createContext();
 
 export const ContextProvider = ({ children }) => {
   const [isClickUpload, setIsClickUpload] = useState(false);

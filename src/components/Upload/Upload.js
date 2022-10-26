@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 
-import BACKEND_URL from "./config";
+import BACKEND_URL from "../../data/config";
 import { useStateContext } from "../../context/ContextProvider";
 
 const Upload = () => {
