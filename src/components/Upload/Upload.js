@@ -94,7 +94,7 @@ const Upload = () => {
         </label>
         <input
           required
-          type='number'
+          type='text'
           value={userID}
           maxLength={20}
           onChange={(e) => setUseID(e.target.value)}
