@@ -7,17 +7,18 @@ const Body = () => {
   const { submits, handleClick } = useStateContext();
 
   return (
-    <div className='flex flex-col md:gap-20 gap-5 w-full'>
+    <div className='flex flex-col md:gap-20 gap-5 w-full text-white'>
       {submits.map((item) => {
         return (
-          <div key={item.id} className='flex flex-col md:gap-8 gap-4 rounded-xl'>
+          <div key={item.id} className='flex flex-col md:gap-8 gap-4'>
             <img src={item.img} alt={item.id} className='rounded-xl shadow-2xl object-cover' />
-            <div className='flex flex-row items-center justify-between px-3 font-semibold border-b-2 border-main-dark-bg'>
+            <div className='flex flex-row items-center justify-between px-3 font-semibold border-b-2 border-main-bg'>
               <div className='flex flex-row gap-4'>
-                <span>用户ID：{item.id}</span>
-                <span>访问次数：{item.views}</span>
+                <span>简介:{item.info}</span>
               </div>
               <div className='flex flex-row gap-4'>
+                <span>ID:{item.id}</span>
+                <span>浏览:{item.views}</span>
                 <a
                   href={item.link}
                   target='_blank'
@@ -25,7 +26,7 @@ const Body = () => {
                   rel='noreferrer'
                   onClick={() => handleClick(item.id)}
                 >
-                  <span>了解更多</span>
+                  <span>跳转</span>
                   <div className='text-main-theme'>
                     <FaShare />
                   </div>

@@ -4,7 +4,8 @@ module.exports = {
     extend: {
       colors: {
         "main-bg": "#FBFBFB",
-        "main-dark-bg": "#B2B2B2",
+        "main-dark-bg": "#20232A",
+        "main-secondary-dark-bg": "#33373E",
         "main-theme": "#FFA500",
         "navbar-theme": "#150050",
       },

@@ -20,7 +20,7 @@ const Card = ({ item }) => {
 const SideBar = () => {
   const { submits, handleClick } = useStateContext();
   const data = [
-    { name: "提交量", value: submits.length, icon: <RiNumbersFill /> },
+    { name: "上传量", value: submits.length, icon: <RiNumbersFill /> },
     { name: "点击量", value: submits.reduce((acc, obj) => acc + obj.views, 0), icon: <MdTouchApp /> },
   ];
 
