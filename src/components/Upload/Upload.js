@@ -9,7 +9,7 @@ const Upload = () => {
   const [userID, setUseID] = useState("");
   const [sourceFiles, setSourceFiles] = useState([]);
   const [previewImage, setPreviewImage] = useState([]);
-  const [isUploaded, setIsUploaded] = useState(false);
+  const [isUploaded, setIsUploaded] = useState(true);
   const [isUploadFailed, setIsUploadFailed] = useState(false);
 
   const hiddenFileInput = useRef();
