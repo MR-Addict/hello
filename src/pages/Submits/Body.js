@@ -1,28 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { FaShare, FaCloudDownloadAlt } from "react-icons/fa";
+import React from "react";
+import { FaShare } from "react-icons/fa";
 
-const BACKEND_URL = "http://127.0.0.1:8090/";
+import { useStateContext } from "../../context/ContextProvider";
 
 const Body = () => {
-  const [submits, setSubmits] = useState([]);
-  const handleClick = async (id) => {
-    await fetch(BACKEND_URL + "api/v1/click/" + id).catch((err) => console.log(err));
-    updateSubmits();
-  };
-
-  const updateSubmits = () => {
-    fetch(BACKEND_URL + "api/v1/all")
-      .then(async (res) => {
-        const resJSON = await res.json();
-        if (resJSON.status) setSubmits(resJSON.msg);
-      })
-      .catch((err) => console.log(err));
-  };
-
-  useEffect(() => {
-    updateSubmits();
-    // eslint-disable-next-line
-  }, []);
+  const { submits, handleClick } = useStateContext();
 
   return (
     <div className='flex flex-col md:gap-20 gap-5 w-full'>
@@ -36,12 +18,6 @@ const Body = () => {
                 <span>访问次数：{item.views}</span>
               </div>
               <div className='flex flex-row gap-4'>
-                <button className='flex flex-row gap-1 items-center justify-center'>
-                  <span>下载文档</span>
-                  <div className='text-main-theme'>
-                    <FaCloudDownloadAlt />
-                  </div>
-                </button>
                 <a
                   href={item.link}
                   target='_blank'
