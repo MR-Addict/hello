@@ -3,7 +3,7 @@ import { RiNumbersFill } from "react-icons/ri";
 import { MdTouchApp } from "react-icons/md";
 import { FaShare } from "react-icons/fa";
 
-import { useStateContext } from "../../context/ContextProvider";
+import { useStateContext } from "../../../context/ContextProvider";
 
 const Card = ({ item }) => {
   return (
@@ -19,17 +19,17 @@ const Card = ({ item }) => {
 
 const SideBar = () => {
   const { submits, handleClick } = useStateContext();
-  const data = [
+  const cards = [
     { name: "上传量", value: submits.length, icon: <RiNumbersFill /> },
     { name: "点击量", value: submits.reduce((acc, obj) => acc + obj.views, 0), icon: <MdTouchApp /> },
   ];
 
   return (
-    <div className='md:w-[400px] w-full bg-main-bg shadow-2xl md:h-[100vh] h-fit sticky top-0 rounded-xl p-4 flex flex-col gap-2'>
+    <div className='md:w-[500px] w-full bg-main-bg shadow-2xl max-h-[100vh] h-fit sticky top-0 rounded-xl p-4 hidden md:flex flex-col gap-2 overflow-y-auto'>
       <div className='flex flex-col gap-1'>
         <div>数据统计</div>
         <div className='flex flex-row justify-between gap-4'>
-          {data.map((item) => {
+          {cards.map((item) => {
             return <Card item={item} key={item.name} />;
           })}
         </div>

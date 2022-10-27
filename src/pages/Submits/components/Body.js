@@ -1,24 +1,35 @@
 import React from "react";
-import { FaShare } from "react-icons/fa";
+import { FaShare, FaUserAlt } from "react-icons/fa";
+import { AiFillEye } from "react-icons/ai";
 
-import { useStateContext } from "../../context/ContextProvider";
+import { useStateContext } from "../../../context/ContextProvider";
 
 const Body = () => {
   const { submits, handleClick } = useStateContext();
 
   return (
-    <div className='flex flex-col md:gap-20 gap-5 w-full text-white'>
+    <div className='flex flex-col md:gap-20 gap-5 w-full'>
       {submits.map((item) => {
         return (
           <div key={item.id} className='flex flex-col md:gap-8 gap-4'>
             <img src={item.img} alt={item.id} className='rounded-xl shadow-2xl object-cover' />
-            <div className='flex flex-row items-center justify-between px-3 font-semibold border-b-2 border-main-bg'>
+            <div className='flex flex-row items-center justify-between px-3 font-semibold border-b-2 border-main-dark-bg'>
               <div className='flex flex-row gap-4'>
-                <span>简介:{item.info}</span>
+                <span>{item.info}</span>
               </div>
               <div className='flex flex-row gap-4'>
-                <span>ID:{item.id}</span>
-                <span>浏览:{item.views}</span>
+                <span className='flex flex-row items-center gap-1'>
+                  <div className='text-main-theme'>
+                    <FaUserAlt />
+                  </div>
+                  {item.id}
+                </span>
+                <span className='flex flex-row items-center gap-1'>
+                  <div className='text-main-theme'>
+                    <AiFillEye />
+                  </div>
+                  {item.views}
+                </span>
                 <a
                   href={item.link}
                   target='_blank'
