@@ -2,7 +2,6 @@ import React from "react";
 import { FaShare, FaUserAlt } from "react-icons/fa";
 import { AiFillEye } from "react-icons/ai";
 
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useStateContext } from "../../../context/ContextProvider";
 
 const Body = () => {
@@ -13,7 +12,7 @@ const Body = () => {
       {submits.map((item) => {
         return (
           <div key={item.id} className='flex flex-col md:gap-8 gap-4'>
-            <LazyLoadImage alt={item.id} src={item.img} className='rounded-xl shadow-2xl object-cover max-h-[600px]' />
+            <img alt={item.id} src={item.img} loading='lazy' className='rounded-xl shadow-2xl object-cover max-h-[600px]' />
             <div className='flex flex-row items-center justify-between px-3 font-semibold border-b-2 border-main-dark-bg'>
               <div className='flex flex-row gap-4'>
                 <span>{item.info}</span>
