@@ -43,7 +43,7 @@ const SideBar = () => {
             .map((item) => {
               return (
                 <div key={item.id} className='flex flex-col gap-2 bg-gray-200 p-2 rounded-md'>
-                  <img src={item.img} alt={item.id} className='rounded-md' />
+                  <img src={item.img} alt={item.id} className='rounded-md max-h-[150px] object-cover' />
                   <div className='flex flex-row items-center justify-between'>
                     <span>{item.id}</span>
                     <a
