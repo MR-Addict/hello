@@ -16,7 +16,7 @@ const Home = () => {
             这是一个学习前端基础的分享网站，在这里，你可以上传你学习编写的前端文件,尽情第发挥你的创意和想法，也可以欣赏他人的作品，感受前端的魅力。
           </p>
           <p>
-            不过上传文件时需要注意几点注意事项，个人ID不建议使用中文，文件引用时要使用相对路径。
+            不过上传文件时需要注意几点注意事项：个人ID要慎重选择，后期不可更改，不建议使用中文和空格；文件引用时要使用相对路径。
           </p>
           <button onClick={onClickUpload} className='bg-main-theme p-3 rounded-xl w-full font-semibold duration-200'>
             立即上传
