@@ -37,7 +37,7 @@ const SideBar = () => {
       <div className='flex flex-col gap-1'>
         <div>最受欢迎</div>
         <div className='flex flex-col gap-4'>
-          {submits
+          {submits.length?(submits
             .sort((a, b) => b.views - a.views)
             .slice(0, 3)
             .map((item) => {
@@ -45,7 +45,7 @@ const SideBar = () => {
                 <div key={item.id} className='flex flex-col gap-2 bg-gray-200 p-2 rounded-md'>
                   <img src={item.img} alt={item.id} loading='lazy' className='rounded-md max-h-[150px] object-cover' />
                   <div className='flex flex-row items-center justify-between'>
-                    <span>{item.id}</span>
+                    <span>{item.info}</span>
                     <a
                       href={item.link}
                       target='_blank'
@@ -61,7 +61,9 @@ const SideBar = () => {
                   </div>
                 </div>
               );
-            })}
+            })):(
+              <div className="text-center w-full">暂无上传</div>
+            )}
         </div>
       </div>
     </div>

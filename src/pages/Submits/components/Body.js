@@ -8,8 +8,8 @@ const Body = () => {
   const { submits, handleClick } = useStateContext();
 
   return (
-    <div className='flex flex-col md:gap-20 gap-5 w-full'>
-      {submits.map((item) => {
+    <div className='flex flex-col md:gap-20 gap-5 w-full min-h-screen'>
+      {submits.length?(submits.map((item) => {
         return (
           <div key={item.id} className='flex flex-col md:gap-8 gap-4'>
             <img alt={item.id} src={item.img} loading='lazy' className='rounded-xl shadow-2xl object-cover max-h-[600px]' />
@@ -46,7 +46,9 @@ const Body = () => {
             </div>
           </div>
         );
-      })}
+      })):(
+        <div className="text-center w-full">暂无上传</div>
+      )}
     </div>
   );
 };
