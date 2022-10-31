@@ -26,7 +26,7 @@ const Upload = () => {
     formData.append("info", userInfo);
     previewImage.forEach((item) => formData.append("preview", item));
     sourceFiles.forEach((item) => formData.append("sources", item));
-    fetch(BACKEND_URL + "api/v1/submit", { method: "POST", body: formData })
+    fetch(BACKEND_URL + "api/v1/upload", { method: "POST", body: formData })
       .then(async (res) => {
         const resJSON = await res.json();
         if (resJSON.status) {

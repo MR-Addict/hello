@@ -3,10 +3,10 @@ import React, { useEffect } from "react";
 import { Body, SideBar } from "./components";
 import { useStateContext } from "../../context/ContextProvider";
 
-const Submits = () => {
-  const { updateSubmits } = useStateContext();
+const Uploads = () => {
+  const { updateUploads } = useStateContext();
   useEffect(() => {
-    updateSubmits();
+    updateUploads();
     // eslint-disable-next-line
   }, []);
 
@@ -18,4 +18,4 @@ const Submits = () => {
   );
 };
 
-export default Submits;
+export default Uploads;

@@ -1,2 +1,2 @@
 export { default as Home } from "./Home/Home";
-export { default as Submits } from "./Submits";
+export { default as Uploads } from "./Uploads";

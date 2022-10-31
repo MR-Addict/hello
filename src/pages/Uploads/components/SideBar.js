@@ -18,10 +18,10 @@ const Card = ({ item }) => {
 };
 
 const SideBar = () => {
-  const { submits, handleClick } = useStateContext();
+  const { uploads, handleClick } = useStateContext();
   const cards = [
-    { name: "上传量", value: submits.length, icon: <RiNumbersFill /> },
-    { name: "点击量", value: submits.reduce((acc, obj) => acc + obj.views, 0), icon: <MdTouchApp /> },
+    { name: "上传量", value: uploads.length, icon: <RiNumbersFill /> },
+    { name: "点击量", value: uploads.reduce((acc, obj) => acc + obj.views, 0), icon: <MdTouchApp /> },
   ];
 
   return (
@@ -37,7 +37,7 @@ const SideBar = () => {
       <div className='flex flex-col gap-1'>
         <div>最受欢迎</div>
         <div className='flex flex-col gap-4'>
-          {submits.length?(submits
+          {uploads.length?(uploads
             .sort((a, b) => b.views - a.views)
             .slice(0, 3)
             .map((item) => {

@@ -5,7 +5,7 @@ const navLinks = [
   },
   {
     title: "浏览",
-    link: "/submits",
+    link: "/uploads",
   },
 ];
 
